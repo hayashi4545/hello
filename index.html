@@ -1,11 +1,154 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Webプロ06 - HTML/CSS</title>
-  </head>
-  <body>
-    <h1>hello</h1>
-    <div class="content">中身</div>
-  </body>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>My Portfolio</title>
+<style>
+  body {
+    margin: 0;
+    font-family: "Georgia", serif;
+    background-color: #f5f0e1;
+    color: #4e3d2c;
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  nav {
+    width: 200px;
+    background-color: #d2b48c;
+    padding: 20px;
+    position: fixed;
+    height: 100vh;
+  }
+
+  nav a {
+    display: block;
+    margin: 10px 0;
+    text-decoration: none;
+    color: #4e3d2c;
+    font-weight: bold;
+  }
+
+  .content {
+    margin-left: 220px;
+    padding: 20px;
+    flex: 1;
+  }
+
+  section {
+    margin-bottom: 100px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+
+  section.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .sticky-img {
+    position: sticky;
+    top: 20px;
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  }
+
+  h2 {
+    margin-top: 0;
+    border-bottom: 2px solid #4e3d2c;
+  }
+
+  /* レスポンシブ: ナビゲーション下部に表示 */
+  @media (max-width: 768px) {
+    nav {
+      position: static;
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    nav a {
+      margin: 5px 10px;
+    }
+
+    .content {
+      margin-left: 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <nav>
+    <a href="#about">経歴</a>
+    <a href="#cat-diary">猫日記</a>
+    <a href="#affiliation">所属</a>
+    <a href="#personal">個人情報</a>
+    <a href="#contact">Contact Me</a>
+  </nav>
+
+  <div class="content">
+    <section id="about">
+      <img src="your_image_about.jpg" alt="経歴画像" class="sticky-img" />
+      <h2>経歴</h2>
+      <p>ここに自分の経歴を記載します。大学や職歴など、自由に書いてください。</p>
+    </section>
+
+    <section id="cat-diary">
+      <img src="your_image_cat.jpg" alt="猫日記画像" class="sticky-img" />
+      <h2>猫日記</h2>
+      <p>猫との日々の記録や面白いエピソードを書いてみましょう。</p>
+    </section>
+
+    <section id="affiliation">
+      <img src="your_image_affiliation.jpg" alt="所属画像" class="sticky-img" />
+      <h2>所属</h2>
+      <p>所属団体や研究室、コミュニティなどの紹介を。</p>
+    </section>
+
+    <section id="personal">
+      <img src="your_image_personal.jpg" alt="個人情報画像" class="sticky-img" />
+      <h2>個人情報</h2>
+      <p>趣味や特技など、自己紹介に関わる内容を書きます。</p>
+    </section>
+
+    <section id="contact">
+      <img src="your_image_contact.jpg" alt="連絡先画像" class="sticky-img" />
+      <h2>Contact Me</h2>
+      <p>メールアドレスやSNSのリンクを記載して、連絡手段を案内します。</p>
+    </section>
+  </div>
+</div>
+
+<!-- フェードイン効果を実装するスクリプト -->
+<script>
+  const sections = document.querySelectorAll("section");
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add("show");
+      }
+    });
+  }, { threshold: 0.2 }); // 20%が見えたら実行
+
+  sections.forEach(section => {
+    observer.observe(section);
+  });
+</script>
+
+</body>
 </html>
+
